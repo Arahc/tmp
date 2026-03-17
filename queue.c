@@ -72,3 +72,13 @@ void queue_free(Queue *queue)
   free(queue);
 }
 
+void another_queue_free(Queue **queue){
+  if(queue==NULL || *queue==NULL){
+    debug("[ERROR] queue is a null pointer on another free\n");
+    return;
+  }
+
+  free((*queue)->data);
+  free(*queue);
+  *queue=NULL;
+}
