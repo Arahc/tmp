@@ -51,7 +51,7 @@ double back(Queue *queue)
 {
   if(queue==NULL){
     debug("[ERROR] queue is a null pointer on back\n");
-    return;
+    return .0;
   }
 
   return queue->data[queue->size - 1];
