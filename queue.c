@@ -2,12 +2,23 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#define debug(...) fprintf(stderr, __VA_ARGS__)
+
 Queue *queue_create(void)
 {
   Queue *queue = malloc(sizeof(Queue));
+  if(queue==NULL){
+    debug("[ERROR] malloc failed on queue creation\n");
+    return NULL;
+  }
   queue->size = 0;
   queue->capacity = QUEUE_INITIAL_CAPACITY;
   queue->data = malloc(sizeof(double) * queue->capacity);
+  if(queue->data==NULL){
+    free(queue);
+    debug("[ERROR] malloc failed on queue capacity application\n");
+    return NULL;
+  }
   return queue;
 }
 
@@ -18,7 +29,12 @@ void push(Queue *queue, double element)
   {
     int capacity = queue->capacity * 2;
 
-    queue->data = realloc(queue->data, sizeof(double) * capacity);
+    double *data2 = realloc(queue->data, sizeof(double) * capacity);
+    if(data2==NULL){
+      debug("[ERROR] realloc failed on queue push\n");
+      return;
+    }
+    queue->data=data2;
     queue->capacity = capacity;
   }
 
