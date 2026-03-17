@@ -53,6 +53,10 @@ double back(Queue *queue)
     debug("[ERROR] queue is a null pointer on back\n");
     return .0;
   }
+  if(queue->size==0){
+    debug("[ERROR] queue is empty on back\n");
+    return .0;
+  }
 
   return queue->data[queue->size - 1];
 }
