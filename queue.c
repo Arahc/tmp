@@ -24,6 +24,10 @@ Queue *queue_create(void)
 
 void push(Queue *queue, double element)
 {
+  if(queue==NULL){
+    debug("[ERROR] queue is a null pointer on push\n");
+    return;
+  }
 
   if (queue->size == queue->capacity)
   {
@@ -45,11 +49,20 @@ void push(Queue *queue, double element)
 
 double back(Queue *queue)
 {
+  if(queue==NULL){
+    debug("[ERROR] queue is a null pointer on back\n");
+    return;
+  }
+
   return queue->data[queue->size - 1];
 }
 
 void queue_free(Queue *queue)
 {
+  if(queue==NULL){
+    debug("[ERROR] queue is a null pointer on free\n");
+    return;
+  }
 
   free(queue->data);
   free(queue);
